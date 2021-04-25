@@ -208,3 +208,25 @@ class LineRotReflectBall {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    lrrb : LineRotReflectBall = new LineRotReflectBall()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.lrrb.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.lrrb.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.lrrb.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    } 
+}
