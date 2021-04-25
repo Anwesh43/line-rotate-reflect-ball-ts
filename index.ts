@@ -1,9 +1,9 @@
-const w : number = window.innerWidth 
-const h : number = window.innerHeight 
+const w : number = 0.8 * window.innerWidth 
+const h : number = 0.8 * window.innerHeight 
 const parts : number = 3
 const scGap : number = 0.02 / parts 
 const strokeFactor : number = 90 
-const rFactor : number = 6.9  
+const rFactor : number = 15.9  
 const lineFactor : number = 6.9 
 const delay : number = 20 
 const colors : Array<string> = [
@@ -58,7 +58,7 @@ class DrawingUtil {
         context.rotate(-Math.PI * sf3)
         DrawingUtil.drawLine(context, 0, 0, 0, -lineSize * sf1)
         context.restore()
-        DrawingUtil.drawCircle(context, cx, h / 2 + r, r)
+        DrawingUtil.drawCircle(context, cx, h / 2 + (lineSize - r), r * sf2)
     }
 
     static drawLRRBNode(context : CanvasRenderingContext2D, i : number, scale : number) {
@@ -143,7 +143,7 @@ class Animator {
 
     stop() {
         if (this.animated) {
-            this.animated = true 
+            this.animated = false 
             clearInterval(this.interval)
         }
     }
